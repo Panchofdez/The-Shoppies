@@ -10,19 +10,23 @@ const { Meta } = Card;
 
 const MovieCard = ({ movie }) => {
   console.log(movie);
-  return (
-    <Card
-      style={{ width: "100%" }}
-      actions={[
-        <SettingOutlined key="setting" />,
-        <EditOutlined key="edit" />,
-        <EllipsisOutlined key="ellipsis" />,
-      ]}
-    >
-      <Meta title={movie.Title} description={movie.Year} />
-      <img alt="" src={movie.Poster} style={{ maxHeight: "400px" }} />
-    </Card>
-  );
+  if (movie) {
+    return (
+      <Card
+        style={{ width: "100%" }}
+        actions={[
+          <SettingOutlined key="setting" />,
+          <EditOutlined key="edit" />,
+          <EllipsisOutlined key="ellipsis" />,
+        ]}
+      >
+        <Meta title={movie.Title} description={movie.Year} />
+        <img alt="" src={movie.Poster} style={{ maxHeight: "200px" }} />
+      </Card>
+    );
+  } else {
+    return null;
+  }
 };
 
 export default MovieCard;

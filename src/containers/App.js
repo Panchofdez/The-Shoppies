@@ -1,57 +1,85 @@
 import React, { useState } from "react";
-import styled from "styled-components";
-import { Row, Col, Steps } from "antd";
+import { Row, Col, Steps, Layout, Menu, PageHeader } from "antd";
 import Searchbar from "../components/Searchbar";
-import { useSelector } from "react-redux";
 import Results from "../components/Results";
+import Nominations from "../components/Nominations";
 import MovieCard from "../components/MovieCard";
+import Background from "../images/background.jpg";
+
+const { Header, Content, Footer, Sider } = Layout;
 
 const App = () => {
-  const [showMovie, setShowMovie] = useState();
   return (
-    <div>
-      <Row
+    <Layout
+      style={{
+        flex: 1,
+        minHeight: "100%",
+      }}
+    >
+      <Sider
+        breakpoint="sm"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
+        }}
+        width={300}
         style={{
-          paddingTop: "50px",
-          height: "70%",
+          flex: 1,
+          backgroundColor: "#F0F8FF",
         }}
       >
-        <Col span={5}>col-6</Col>
-        <Col span={14}>
-          <h1>The Shoppies</h1>
-          <Searchbar />
-          <Row gutter={[16, 16]} style={{ marginTop: "20px" }}>
-            <Col span={12} style={{ overflow: "hidden" }}>
-              <Results setShowMovie={setShowMovie} />
-            </Col>
-            <Col span={12}>
-              <MovieCard movie={showMovie} />
+        <Row style={{ marginTop: "50px", position: "sticky", top: 0 }}>
+          <Col span={2}></Col>
+          <Col span={20}>
+            <h3 style={{ marginTop: "10px" }}>Your Nominations</h3>
+            <Nominations />
+          </Col>
+          <Col span={2}></Col>
+        </Row>
+      </Sider>
+      <Layout style={{ backgroundColor: "white" }}>
+        <Content>
+          <PageHeader
+            style={{
+              background: `url(${Background}) `,
+
+              backgroundPosition: "center",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              paddingTop: "70px",
+            }}
+          >
+            <h2
+              style={{ color: "white", fontWeight: "bold", fontSize: "30px" }}
+            >
+              The Shoppies
+            </h2>
+            <Content style={{ color: "white", marginBottom: "15px" }}>
+              Nominate 5 movies for the upcoming Shoppies awards
+            </Content>
+          </PageHeader>
+          <Row
+            style={{
+              paddingTop: "35px",
+              paddingBottom: "35px",
+            }}
+          >
+            <Col xs={1}></Col>
+            <Col xs={22}>
+              <Searchbar />
+              <Row gutter={16} style={{ marginTop: "20px" }}>
+                <Col span={24} style={{ overflow: "hidden" }}>
+                  <Results />
+                </Col>
+              </Row>
             </Col>
           </Row>
-        </Col>
-        <Col span={5}>col-6</Col>
-      </Row>
-      <Row
-        style={{
-          backgroundColor: "grey",
-          width: "100%",
-          flex: 1,
-        }}
-      >
-        <Col span={2}></Col>
-        <Col span={20}>
-          <h2>Your Nominations</h2>
-          <Steps>
-            <Steps.Step title="Movie 1" description="This is a description." />
-            <Steps.Step title="Movie 2" description="This is a description." />
-            <Steps.Step title="Movie 3" description="This is a description." />
-            <Steps.Step title="Movie 4" description="This is a description." />
-            <Steps.Step title="Movie 5" description="This is a description." />
-          </Steps>
-        </Col>
-        <Col span={2}></Col>
-      </Row>
-    </div>
+        </Content>
+      </Layout>
+    </Layout>
   );
 };
 
