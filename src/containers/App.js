@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import { Row, Col, Steps, Layout, Menu, PageHeader } from "antd";
+import React from "react";
+import { Row, Col, Layout, PageHeader } from "antd";
 import Searchbar from "../components/Searchbar";
-import Results from "../components/Results";
-import Nominations from "../components/Nominations";
-import MovieCard from "../components/MovieCard";
+import Results from "./Results";
+import Nominations from "./Nominations";
 import Background from "../images/background.jpg";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const App = () => {
   return (

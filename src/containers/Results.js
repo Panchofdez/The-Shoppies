@@ -1,5 +1,15 @@
 import React, { useState } from "react";
-import { List, Avatar, Button, message, Modal } from "antd";
+import {
+  List,
+  Avatar,
+  Button,
+  message,
+  Row,
+  Col,
+  Drawer,
+  Descriptions,
+  Empty,
+} from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { updateNominations } from "../store/actions/nominations";
 import { fetchMovie } from "../store/actions/movies";
@@ -21,7 +31,7 @@ const Results = () => {
     if (newNominations.length === 5) {
       message.success(
         "Congratulations! You have successfully nominated 5 movies",
-        8
+        5
       );
     }
   };
@@ -76,28 +86,72 @@ const Results = () => {
             </List.Item>
           )}
         />
-        <Modal
+
+        <Drawer
+          title={`${showMovie.Title} ${showMovie.Year}`}
+          placement="right"
+          closable={true}
+          onClose={() => setVisible(false)}
           visible={visible}
-          title={showMovie.Title}
-          onCancel={() => setVisible(false)}
-          footer={[
-            isNominated(showMovie) ? null : (
+          width={500}
+          bodyStyle={{ padding: 0 }}
+        >
+          <Row>
+            <Col span={9}>
+              <img
+                src={showMovie.Poster}
+                style={{ width: "100%", height: "100%" }}
+              />
+            </Col>
+            <Col span={15}>
+              <Descriptions column={2} size="small" bordered>
+                <Descriptions.Item label="Genre" span={2}>
+                  {showMovie.Genre}
+                </Descriptions.Item>
+                <Descriptions.Item label="Actors" span={2}>
+                  {showMovie.Actors}
+                </Descriptions.Item>
+                <Descriptions.Item label="Director" span={2}>
+                  {showMovie.Director}
+                </Descriptions.Item>
+
+                <Descriptions.Item label="Rated">
+                  {showMovie.Rated}
+                </Descriptions.Item>
+                <Descriptions.Item label="Rating">
+                  {showMovie.imdbRating}
+                </Descriptions.Item>
+
+                <Descriptions.Item label="Awards" span={2}>
+                  {showMovie.Awards}
+                </Descriptions.Item>
+              </Descriptions>
+            </Col>
+          </Row>
+          <Row style={{ padding: 15 }}>
+            <Col span={24}>
+              <p>{showMovie.Plot}</p>
+            </Col>
+            {isNominated(showMovie) ? null : (
               <Button
                 shape="round"
-                size="medium"
-                key="nominate"
+                size="small"
+                key="list-loadmore-nominate"
                 type="primary"
-                onClick={() => addNomination(showMovie)}
+                onClick={() => {
+                  addNomination(showMovie);
+                  setVisible(false);
+                }}
               >
                 Nominate
               </Button>
-            ),
-          ]}
-        ></Modal>
+            )}
+          </Row>
+        </Drawer>
       </div>
     );
   } else {
-    return null;
+    return <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />;
   }
 };
 

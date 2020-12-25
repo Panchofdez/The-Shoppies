@@ -1,10 +1,7 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Steps, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  resetNominations,
-  updateNominations,
-} from "../store/actions/nominations";
+import { updateNominations } from "../store/actions/nominations";
 import { DeleteOutlined } from "@ant-design/icons";
 
 const Nominations = () => {
@@ -12,11 +9,8 @@ const Nominations = () => {
   const nominations = useSelector((state) => state.nominations);
 
   useEffect(() => {
-    console.log("hello");
     if (localStorage.nominations) {
-      console.log(localStorage.nominations);
       const nominations = JSON.parse(localStorage.nominations);
-      console.log(nominations);
       dispatch(updateNominations(nominations));
     }
   }, []);

@@ -1,4 +1,4 @@
-import { Input, Button } from "antd";
+import { Input } from "antd";
 import { searchMovies } from "../store/actions/movies";
 import { useDispatch } from "react-redux";
 
