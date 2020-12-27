@@ -11,7 +11,6 @@ const Searchbar = () => {
       allowClear
       onSearch={(value) => dispatch(searchMovies(value))}
       className="elevated"
-      borderless
     />
   );
 };

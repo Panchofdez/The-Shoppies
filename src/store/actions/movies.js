@@ -1,4 +1,5 @@
 import axios from "axios";
+import { message } from "antd";
 
 const loadMovies = (movies) => {
   return {
@@ -19,29 +20,35 @@ export const searchMovies = (query) => {
     try {
       if (query === "") {
         dispatch(loadMovies([]));
+        return;
       }
       const response = await axios.get(
         `http://www.omdbapi.com/?apikey=2ae0235e&s='${query}'`
       );
-      console.log(response.data.Search);
+      if (response.data.Response && response.data.Response === "False") {
+        //check to see if there are no results found or if there are too many results
+        message.error(response.data.Error);
+        dispatch(loadMovies([]));
+        return;
+      }
       dispatch(loadMovies(response.data.Search));
     } catch (err) {
-      console.log(err);
+      message.error(err);
     }
   };
 };
 
 export const fetchMovie = (id) => {
+  //fetches more info about a particular movie
   return async (dispatch) => {
     try {
-      console.log(id);
       const response = await axios.get(
         `http://www.omdbapi.com/?apikey=2ae0235e&i=${id}`
       );
-      console.log(response.data);
+
       dispatch(showMovie(response.data));
     } catch (err) {
-      console.log(err);
+      message.error("Something went wrong...");
     }
   };
 };

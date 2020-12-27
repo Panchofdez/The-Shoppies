@@ -18,12 +18,6 @@ const App = () => {
       <Sider
         breakpoint="sm"
         collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
-        }}
         width={300}
         style={{
           flex: 1,

@@ -10,10 +10,11 @@ const Nominations = () => {
 
   useEffect(() => {
     if (localStorage.nominations) {
+      //checks to see if there are nominated movies from the last time the user was on the website
       const nominations = JSON.parse(localStorage.nominations);
       dispatch(updateNominations(nominations));
     }
-  }, []);
+  }, [dispatch]);
 
   const showMovies = () => {
     const moviesArr = [];
@@ -43,8 +44,9 @@ const Nominations = () => {
   const removeNomination = (movie) => {
     const newNominations = nominations.filter((m) => {
       if (m.imdbID !== movie.imdbID) {
-        return m;
+        return true;
       }
+      return false;
     });
     dispatch(updateNominations(newNominations));
   };
