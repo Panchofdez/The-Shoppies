@@ -18,7 +18,6 @@ const Nominations = () => {
   const showMovies = () => {
     const moviesArr = [];
     for (let i = 0; i < 5; i++) {
-      console.log(nominations[i]);
       let title = nominations[i] ? nominations[i].Title : `Movie ${i + 1}`;
       let year = nominations[i] ? nominations[i].Year : "";
 
@@ -43,7 +42,7 @@ const Nominations = () => {
   };
   const removeNomination = (movie) => {
     const newNominations = nominations.filter((m) => {
-      if (m.imdbID != movie.imdbID) {
+      if (m.imdbID !== movie.imdbID) {
         return m;
       }
     });

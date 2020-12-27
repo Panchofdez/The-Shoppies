@@ -1,10 +1,3 @@
-// const addNomination = (movie) =>{
-//     return {
-//         type:"ADD_NOMINATION",
-//         payload: movie
-//     }
-// }
-
 const setNominations = (nominations) => {
   return {
     type: "SET_NOMINATIONS",
@@ -21,11 +14,8 @@ export const updateNominations = (nominations) => {
 
 export const resetNominations = () => {
   return (dispatch) => {
-    console.log("Hello");
     if (localStorage.nominations) {
-      console.log(localStorage.nominations);
       const nominations = JSON.parse(localStorage.nominations);
-      console.log(nominations);
       dispatch(setNominations(nominations));
     }
   };

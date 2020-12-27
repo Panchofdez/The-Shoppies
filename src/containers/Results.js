@@ -38,7 +38,7 @@ const Results = () => {
 
   const isNominated = (movie) => {
     for (let i = 0; i < nominations.length; i++) {
-      if (nominations[i].imdbID == movie.imdbID) {
+      if (nominations[i].imdbID === movie.imdbID) {
         return true;
       }
     }
@@ -97,13 +97,14 @@ const Results = () => {
           bodyStyle={{ padding: 0 }}
         >
           <Row>
-            <Col span={9}>
+            <Col span={9} style={{ padding: 10 }}>
               <img
+                alt="poster"
                 src={showMovie.Poster}
                 style={{ width: "100%", height: "100%" }}
               />
             </Col>
-            <Col span={15}>
+            <Col span={15} style={{ padding: 10 }}>
               <Descriptions column={2} size="small" bordered>
                 <Descriptions.Item label="Genre" span={2}>
                   {showMovie.Genre}
@@ -114,16 +115,14 @@ const Results = () => {
                 <Descriptions.Item label="Director" span={2}>
                   {showMovie.Director}
                 </Descriptions.Item>
-
+                <Descriptions.Item label="Awards" span={2}>
+                  {showMovie.Awards}
+                </Descriptions.Item>
                 <Descriptions.Item label="Rated">
                   {showMovie.Rated}
                 </Descriptions.Item>
                 <Descriptions.Item label="Rating">
                   {showMovie.imdbRating}
-                </Descriptions.Item>
-
-                <Descriptions.Item label="Awards" span={2}>
-                  {showMovie.Awards}
                 </Descriptions.Item>
               </Descriptions>
             </Col>

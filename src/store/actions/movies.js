@@ -17,7 +17,7 @@ const showMovie = (movie) => {
 export const searchMovies = (query) => {
   return async (dispatch) => {
     try {
-      if (query == "") {
+      if (query === "") {
         dispatch(loadMovies([]));
       }
       const response = await axios.get(
