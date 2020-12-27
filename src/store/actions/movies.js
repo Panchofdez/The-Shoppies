@@ -23,7 +23,7 @@ export const searchMovies = (query) => {
         return;
       }
       const response = await axios.get(
-        `http://www.omdbapi.com/?apikey=2ae0235e&s='${query}'`
+        `https://www.omdbapi.com/?apikey=2ae0235e&s='${query}'`
       );
       if (response.data.Response && response.data.Response === "False") {
         //check to see if there are no results found or if there are too many results
@@ -43,7 +43,7 @@ export const fetchMovie = (id) => {
   return async (dispatch) => {
     try {
       const response = await axios.get(
-        `http://www.omdbapi.com/?apikey=2ae0235e&i=${id}`
+        `https://www.omdbapi.com/?apikey=2ae0235e&i=${id}`
       );
 
       dispatch(showMovie(response.data));
